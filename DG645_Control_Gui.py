@@ -25,7 +25,7 @@ class ControlGui_645:
         self.resetBoxButton = tk.Button(master=self.connectionFrame, text='Reset', command=self._resetBox, width=8, height=2)
         self.resetBoxButton.grid(row=1, column=2, rowspan=2, columnspan=2, sticky='nsew')
         self.comportEntry = tk.Entry(master=self.connectionFrame, width=15)
-        self.comportEntry.insert(0, 'serial://COM3')
+        self.comportEntry.insert(0, 'serial://COM7')
         self.comportEntry.grid(row=3, column=1, columnspan=2, sticky='e')
         tk.Label(master=self.connectionFrame, text='Com Port:').grid(row=3, column=0)
         self.connectionFrame.grid(row=0, column=0, rowspan=2, columnspan=3, sticky='w')

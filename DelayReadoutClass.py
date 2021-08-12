@@ -22,7 +22,7 @@ class DelayReadout:
         self.x = posX
         self.y = posY
         self.master = master
-        tk.Label(master=self.frame, text='Delays:', font=('Courier', 15)).grid(row=0, column=0, sticky='ew')
+        tk.Label(master=self.frame, text='Delays:', font=('Courier', 12)).grid(row=0, column=0, sticky='ew')
         for i, k in enumerate(text.rstrip().split('\n')):
             j = k.split()
             channelReadout(self.frame, j[0], j[2], j[-1], row=i+1)
@@ -54,7 +54,7 @@ class channelReadout:
 class threeDigitSection:
     def __init__(self, master, text, unit='', row=0, col=0):
         self.frame = tk.Frame(master=master)
-        self.toptext = tk.Label(master=self.frame, text=text.upper(), font=('Courier', 15))
+        self.toptext = tk.Label(master=self.frame, text=text.upper(), font=('Courier', 12))
         self.bottomtext = tk.Label(master=self.frame, text=unit)
         self.toptext.grid(row=0, column=0, sticky='sew')
         self.bottomtext.grid(row=1, column=0, sticky='new')
@@ -73,9 +73,9 @@ class voltageReadout:
         del self.frame
         self.frame = tk.Frame(master=self.master)
         text = text.split('\n')
-        tk.Label(master=self.frame, text='Voltages:', font=('Courier', 15)).grid(row=0, column=0, sticky='nw')
+        tk.Label(master=self.frame, text='Voltages:', font=('Courier', 12)).grid(row=0, column=0, sticky='nw')
         for i, j in enumerate(['T0', 'AB', 'CD', 'EF', 'GH']):
-            tk.Label(master=self.frame, text=str(j + ':' + text[i] + ' V'),  font=('Courier', 15)).grid(row=i+1, column=0, sticky='nw')
+            tk.Label(master=self.frame, text=str(j + ':' + text[i] + ' V'),  font=('Courier', 12)).grid(row=i+1, column=0, sticky='nw')
         self.frame.grid(row=self.x, column=self.y, columnspan=3, sticky='nw')
 
 if __name__ == '__main__':
