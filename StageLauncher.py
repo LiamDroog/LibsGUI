@@ -8,6 +8,7 @@ class StageLauncher:
     def __init__(self, master, owd):
         # Stuff for launching stage
         # self.window = tk.Tk(className='Launcher')
+        self.owd = owd
         os.chdir(owd)
         self.window = tk.Toplevel(master=master)
         self.window.title('Stage Control Launcher')
@@ -65,7 +66,7 @@ class StageLauncher:
 
     def __startStage(self):
         try:
-            self.stage = LIBS_2AxisStage(self.comval.get(), self.baudval.get(), self.startfile.get()).start()
+            self.stage = LIBS_2AxisStage(self.comval.get(), self.baudval.get(), self.startfile.get(), self.owd).start()
         except Exception as e:
             self.stagelabel.config(text='Could not start stage', fg='Red')
             print(e)

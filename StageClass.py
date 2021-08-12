@@ -24,7 +24,9 @@ import multiprocessing as mp
 
 class LIBS_2AxisStage:
 
-    def __init__(self, port, baud, startupfile):
+    def __init__(self, port, baud, startupfile, owd):
+        self.owd = owd
+        os.chdir(self.owd)
         self.s = None
         self.window = tk.Toplevel()
         self.window.title('Stage Control')
@@ -214,28 +216,24 @@ class LIBS_2AxisStage:
         self.__getLastPos()
         self.window.mainloop()
 
-    def stop(self):
-        self.connected = False
-        self.s.close()
-        self.s = None
-        self.queue = None
-        print('Connection closed')
-        self.window.destroy()
+    # def stop(self):
+    #     self.connected = False
+    #     self.s.close()
+    #     self.s = None
+    #     self.queue = None
+    #     print('Connection closed')
+    #     self.window.destroy()
 
     def __on_closing(self):
         if messagebox.askokcancel("Quit", "Quit?"):
-            try:
-                self.DG645.close()
-            except AttributeError as e:
-                pass
-            finally:
-                self.__setLastPos()
-                self.connected = False
-                self.s.close()
-                self.s = None
-                self.queue = None
-                print('Connection closed')
-                self.window.destroy()
+            os.chdir(self.owd)
+            self.__setLastPos()
+            self.connected = False
+            self.s.close()
+            self.s = None
+            self.queue = None
+            print('Connection closed')
+            self.window.destroy()
 
     def setKeybinds(self):
         """
@@ -254,8 +252,6 @@ class LIBS_2AxisStage:
         self.lbl_pos.configure(text='X: %1.3f, Y:%1.3f, Feedrate: %d' % (self.pos[0], self.pos[1], self.feedrate))
         self.window.after(5, self.Refresh)
 
-    def _connectStanfordBox(self):
-        self.DG645 = DG645('serial://COM3')
 
     def isOpen(self):
         if self.s:
@@ -728,19 +724,6 @@ class LIBS_2AxisStage:
             else:
                 self.temprunning = False
                 return
-
-    def _sendDG645Query(self, command, ins=False):
-        return self.DG645.query(command)
-        # self.entrybar.delete(0, 'end')
-        # rtn = self.DG645.query(command)
-        # if ins:
-        #     self.entrybar.insert(0, rtn)
-        #     return
-        # return rtn
-
-    def sendDG645Command(self, command):
-        # self.entrybar.delete(0, 'end')
-        self.DG645.sendcmd(command)
 
 if __name__ == '__main__':
     LIBS_2AxisStage()
