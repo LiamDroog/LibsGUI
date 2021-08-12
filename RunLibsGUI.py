@@ -85,14 +85,16 @@ class runcam:
         self.launch_stage_control.grid(row=9, column=0, columnspan=2, sticky='nsew')
         # IMAGE MEME
         try:
-            self.image = Image.open('C:\\Users\\Liam Droog\\Desktop\\catcamera.jpg')
-            factor = 0.4
-            self.image = self.image.resize((int(self.image.size[0] * factor), int(self.image.size[1] * factor)),
-                                           Image.ANTIALIAS)
-            self.tkimage = ImageTk.PhotoImage(self.image)
-            self.label = tk.Label(master=self.window, image=self.tkimage)
-            self.label.image = self.tkimage
-            self.label.grid(row=4, column=3, columnspan=5, rowspan=10)
+            # self.image = Image.open('C:\\Users\\Liam Droog\\Desktop\\catcamera.jpg')
+            # factor = 0.4
+            # self.image = self.image.resize((int(self.image.size[0] * factor), int(self.image.size[1] * factor)),
+            #                                Image.ANTIALIAS)
+            # self.tkimage = ImageTk.PhotoImage(self.image)
+            # self.label = tk.Label(master=self.window, image=self.tkimage)
+            with open('Config/Instructions.txt') as f:
+                g = f.read()
+                self.label = tk.Label(master=self.window, text=g, anchor='e', justify=tk.LEFT)
+                self.label.grid(row=4, column=3, columnspan=5, rowspan=10)
         except:
             pass
 

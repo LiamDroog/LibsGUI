@@ -1,0 +1,10 @@
+Step 1: Initialize directories for images and spectra to be saved to; select them.
+Step 2: Ensure Thorlabs spec is saving txt files to the right directory and is running on external triggering
+Step 3: Click set - if all is well, the three grey buttons below should become active.
+Step 4: Start the camera by clicking the start camera button. Check cmd output to ensure it has configured correctly
+Step 5: Launch the data viewer
+Step 6: Launch Stanford Box control.
+Step 6a: Input correct COM port into entry. Currently, COM7 should work.
+Step 7: Launch stage control
+Step 7a: Input correct COM port into dropdown. Currently, COM6 should work.
+Step 8: Do science!
