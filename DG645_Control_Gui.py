@@ -1,3 +1,14 @@
+"""
+##################################################
+Provides graphical interface to use the stanford
+research system DG645 digital delay generator.
+##################################################
+# Author:   Liam Droog
+# Email:    droog@ualberta.ca
+# Year:     2021
+# Version:  V.1.0.0
+##################################################
+"""
 import tkinter as tk
 from DG645SFS import DG645
 from DelayReadoutClass import (DelayReadout, voltageReadout)

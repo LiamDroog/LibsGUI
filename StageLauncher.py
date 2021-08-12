@@ -1,3 +1,17 @@
+"""
+##################################################
+Orchestrates the running of the FLIR camera for
+LIBS experiments. Depends on camcapture.py and
+Disp_images.py for capture and display of images
+respectively.
+##################################################
+# Author:   Liam Droog
+# Email:    droog@ualberta.ca
+# Year:     2021
+# Version:  V.1.0.0
+##################################################
+"""
+
 import tkinter as tk
 from StageClass import LIBS_2AxisStage
 import serial.tools.list_ports
