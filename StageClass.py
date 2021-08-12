@@ -16,7 +16,6 @@ import serial
 import time
 import numpy as np
 import os
-from DG645SFS import DG645
 # import h5py
 # from beta_QueueClass import Queue
 import multiprocessing as mp
@@ -191,10 +190,6 @@ class LIBS_2AxisStage:
         self.output.configure(bg='white')
         self.window.bind('<Return>', (lambda x: self.sendCommand(self.gcode_entry.get(), entry=self.gcode_entry,
                                                                  resetarg=True)))
-
-        # ################ DG645 interfacing
-        self.connectStandfordBoxBtn = tk.Button(master=self.window, text='Connect to DG645',
-                                                command=self._connectStanfordBox)
         #GRID ME
 
 
