@@ -1,0 +1,83 @@
+AcquisitionMode: Continuous
+AcquisitionFrame Count: 2
+AcquisitionBurst Frame Count: 1
+ExposureMode: Timed
+ExposureTime: 14632.0
+ExposureAuto: Continuous
+AcquisitionFrame Rate: 170.20743520543357
+ResultingFrame Rate: 67.86717321820166
+AcquisitionFrame Rate Enable: False
+AcquisitionLine Rate: 179468.77135678392
+TriggerSelector: FrameStart
+TriggerMode: Off
+TriggerSource: Software
+TriggerOverlap: Off
+TriggerDelay: 14.0
+SensorShutter Mode: Global
+GainSelector: All
+Gain: 17.827722459667662
+GainAuto: Continuous
+BlackLevelSelector: All
+BlackLevel: 0.0
+Gamma: 0.800048828125
+GammaEnable: True
+SensorWidth: 1280
+SensorHeight: 1024
+WidthMax: 1280
+HeightMax: 1024
+Width: 1280
+Height: 1024
+OffsetX: 0
+OffsetY: 0
+PixelFormat: Mono8
+PixelSize: Bpp8
+PixelColorFilter: None
+PixelDynamicRangeMin: 0
+PixelDynamicRangeMax: 255
+ISPEnable: False
+BinningSelector: All
+BinningHorizontalMode: Sum
+BinningVerticalMode: Sum
+BinningHorizontal: 1
+BinningVertical: 1
+DecimationSelector: All
+DecimationHorizontalMode: Discard
+DecimationVerticalMode: Discard
+DecimationHorizontal: 1
+DecimationVertical: 1
+ReverseX: False
+ReverseY: False
+TestPatternGeneratorSelector: Sensor
+TestPattern: Off
+ADCBitDepth: Bit10
+DeviceScanType: Areascan
+DeviceSensorChroma: Mono
+DeviceVendorName: FLIR
+DeviceModelName: Blackfly S BFS-U3-13Y3M
+SensorDescription: OnSemi PYTHON1300 (1/2" Mono CMOS)
+DeviceManufacturer Info: Aug  8 2018 16:29:13
+DeviceVersion: 1808.0.120.0
+DeviceFirmwareVersion: 1808.0.120.0
+DeviceSerialNumber: 19129388
+DeviceID: 19129388
+DeviceUser ID:
+DeviceTLType: USB3Vision
+DeviceGenCP Version Major: 1
+DeviceGenCP Version Minor: 0
+DeviceMaxThroughput: 223620820
+DeviceLinkSpeed: 500000000
+DeviceLinkThroughput Limit: 380000000
+DeviceLinkBandwidth Reserve: 0.0
+DeviceLinkCurrentThroughput: 88960833
+DeviceIndicatorMode: Active
+DeviceTemperatureSelector: Sensor
+DeviceTemperature: 45.75
+TimestampLatchValue: 0
+TimestampIncrement: 1000
+DevicePowerSupplySelector: External
+PowerSupplyVoltage: 5.36328125
+PowerSupplyCurrent: 0.44775390625
+DeviceUptime: 447
+LinkUptime: 437
+EnumerationCount: 1
+MaxDeviceResetTime: 30000

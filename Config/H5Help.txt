@@ -1,0 +1,5 @@
+get;;Gets input file if it exists such that operations can be performed on it.
+create;;Creates HDF5 file in current directory with given input filename.
+setmetadata;;Sets metadata for a given file or dataset, specified by path
+getmetadata;;Gets parent file metadata from target hdf5 file and outputs it to the output box.
+tree;;Similar to windows style tree command, displays all groups and datasets for a given hdf5 file

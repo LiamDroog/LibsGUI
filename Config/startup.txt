@@ -1,0 +1,29 @@
+; File used to set parameters of the stage. Not a comprehensive list, but it covers what we need for our stage
+; Don't leave any blank lines, otherwise the parser will throw a fit.
+;
+; step pulse length (μs)
+$0=10
+; step idle delay (ms)
+$1=150
+; axis direction (2: x nominal, y reversed)
+$3=1
+; status report (1: report machine coords)
+$10=1
+; Feedback units (0: mm)
+$13=0
+; x steps/mm
+$100=401
+;y steps/mm
+$101=401
+; x max feedrate (mm/min)
+$110=1400
+; y max feedrate (mm/min)
+$111=1400
+; x max acceleration
+$120=130
+; y max acceleration
+$121=130
+; set units to mm, set absolute mode
+g21 g90
+; set zeros
+g92 x0 y0

@@ -1,0 +1,22 @@
+AcquisitionMode: Continuous
+AcquisitionFrame Count: 2
+AcquisitionBurst Frame Count: 1
+ExposureMode: Timed
+ExposureTime: 14632.0
+ExposureAuto: Continuous
+AcquisitionFrame Rate: 170.20743520543357
+ResultingFrame Rate: 67.86717321820166
+AcquisitionFrame Rate Enable: False
+AcquisitionLine Rate: 179468.77135678392
+TriggerSelector: FrameStart
+TriggerMode: Off
+TriggerSource: Software
+TriggerOverlap: Off
+TriggerDelay: 14.0
+GainSelector: All
+Gain: 17.827722459667662
+GainAuto: Continuous
+BlackLevelSelector: All
+BlackLevel: 0.0
+Gamma: 0.800048828125
+GammaEnable: True
