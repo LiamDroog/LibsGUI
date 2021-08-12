@@ -27,6 +27,7 @@ from StageLauncher import StageLauncher
 
 class runcam:
     def __init__(self):
+        self.owd = os.getcwd()
         self.window = tk.Tk(className='\Camera Setup')
         self.image_directory = os.getcwd()
 
@@ -106,7 +107,7 @@ class runcam:
         self.stanfordbox = ControlGui_645(master)
 
     def launchStageControl(self, master):
-        self.stagecontrol = StageLauncher(master)
+        self.stagecontrol = StageLauncher(master, self.owd)
 
     def setTargetDirectory(self):
         """

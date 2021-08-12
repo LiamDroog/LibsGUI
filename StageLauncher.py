@@ -1,12 +1,14 @@
 import tkinter as tk
 from StageClass import LIBS_2AxisStage
 import serial.tools.list_ports
+import os
 
 
 class StageLauncher:
-    def __init__(self, master):
+    def __init__(self, master, owd):
         # Stuff for launching stage
         # self.window = tk.Tk(className='Launcher')
+        os.chdir(owd)
         self.window = tk.Toplevel(master=master)
         self.window.title('Stage Control Launcher')
         self.stage = None
