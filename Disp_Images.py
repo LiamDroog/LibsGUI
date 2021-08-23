@@ -1,15 +1,3 @@
-"""
-##################################################
-Displays images from an image directory and
-txt spectra files from a spectra directory side by
-side for use within LIBS experiments
-##################################################
-# Author:   Liam Droog
-# Email:    droog@ualberta.ca
-# Year:     2021
-# Version:  V.1.0.0
-##################################################
-"""
 import tkinter as tk
 from tkinter import font, ttk
 import os
@@ -21,10 +9,19 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 
 class imageViewer:
+    """
+    Displays images from an image directory and
+    txt spectra files from a spectra directory side by
+    side for use within LIBS experiments
+    # Author:   Liam Droog
+    # Email:    droog@ualberta.ca
+    # Year:     2021
+    # Version:  V.1.0.0
+    """
     def __init__(self, image_target_dir, spectra_target_dir, file_extension, master=None):
         # self.window = tk.Tk(className='\Image Viewer')
         self.num_of_images = 5
-        self.iter = 1
+        # self.iter = 1
         # instatiate master window
         # below is all gui setup
         self.window = tk.Toplevel(master=master)
@@ -112,12 +109,19 @@ class imageViewer:
         self.window.mainloop()
 
     def resize_canvas(self, event):
+        """
+        Doesn't work yet. Should resize canvas when window is resized
+
+        :param event: Required by tkinter
+        :return: None
+        """
         w, h = event.width - 100, event.height - 100
         self.canvas.config(width=w, height=h)
 
     def pollDirectory(self):
         """
         Polls target directories and pulls lists of files to pass to update_image
+
         :return: None
         """
         # Make sure cwd is the same as the target wd
@@ -146,6 +150,7 @@ class imageViewer:
     def _on_mousewheel(self, event):
         """
         Scrolls the window when you use the scrollwheel
+
         :param event: Event?
         :return:
         """
@@ -156,11 +161,10 @@ class imageViewer:
         """
         Updates screen with specified number of images in init, side by side with
         their corresponding spectra.
-        :param: img_dir_list: List of files present in the image directory. Does not
-                include full file path
-        :param: spectra_dir_list: List of files present in the spectra directory.
-                Does not include full file path
-        :return:
+
+        :param: img_dir_list: List of files present in the image directory. Does not include full file path
+        :param: spectra_dir_list: List of files present in the spectra directory. Does not include full file path
+        :return: None
         """
 
         # get 5 most recent files and reverse list so that the most recent is index 0
@@ -180,7 +184,6 @@ class imageViewer:
             os.chdir(self.image_target_dir)
             # set title of frame to file name
             self.list_of_sample_header[j].config(text=i.split('\\')[-1])
-
             # open and scale image, then insert into label
             self.sample_image = Image.open(i)
             factor = 0.35
@@ -201,7 +204,7 @@ class imageViewer:
             # pull data from target file
             dat = np.loadtxt(self.spectra_dir_list[j], dtype=float, delimiter=';')
             # plot
-            self.list_of_spectra_plot_ax[j].plot(dat[:, 0], dat[:, 1], linewidth=0.65)
+            self.list_of_spectra_plot_ax[j].plot(dat[:, 0], dat[:, 1], linewidth=0.35)
             # Set plot-oriented stuff
             self.list_of_spectra_plot_ax[j].set_xlim([200, 1000])
             self.list_of_spectra_plot_ax[j].set_ylim([0, 1])
@@ -218,6 +221,7 @@ class imageViewer:
     def onClosing(self):
         """
         Allows closing of windows to be cleaner versus tkinter's build in methods
+
         :return: None
         """
         self.window.destroy()

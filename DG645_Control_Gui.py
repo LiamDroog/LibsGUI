@@ -1,18 +1,20 @@
-"""
-##################################################
-Provides graphical interface to use the stanford
-research system DG645 digital delay generator.
-##################################################
-# Author:   Liam Droog
-# Email:    droog@ualberta.ca
-# Year:     2021
-# Version:  V.1.0.0
-##################################################
-"""
+
 import tkinter as tk
 from DG645SFS import DG645
 from DelayReadoutClass import (DelayReadout, voltageReadout)
 class ControlGui_645:
+    """
+    Provides graphical interface to use the stanford
+    research system DG645 digital delay generator.
+    Plug in the usb-RS232 cable to the computer and the
+    box, and then configure self.comport_entry to the
+    appropriate com port. Or manually input it every
+    time like a savage.
+    # Author:   Liam Droog
+    # Email:    droog@ualberta.ca
+    # Year:     2021
+    # Version:  V.1.0.0
+    """
     def __init__(self, master):
         self.optlist = ['0', 't', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
 
@@ -27,8 +29,6 @@ class ControlGui_645:
         self.window.rowconfigure(self.rowarr, minsize=25, weight=1)
         self.window.columnconfigure(self.colarr, minsize=25, weight=1)
 
-        # self.comport = 'serial://COM3'
-
         self.connectionFrame = tk.Frame(master=self.window)
         tk.Label(master=self.connectionFrame, text='Connections:').grid(row=0, column=0, columnspan=4, sticky='nsew')
         self.connectbutton = tk.Button(master=self.connectionFrame, text='Connect', command=self._connectToBox)
@@ -36,12 +36,15 @@ class ControlGui_645:
         self.resetBoxButton = tk.Button(master=self.connectionFrame, text='Reset', command=self._resetBox, width=8, height=2)
         self.resetBoxButton.grid(row=1, column=2, rowspan=2, columnspan=2, sticky='nsew')
         self.comportEntry = tk.Entry(master=self.connectionFrame, width=15)
+
+        # this should be user input, but this is the port that the LIBS computer is currently on.
         self.comportEntry.insert(0, 'serial://COM7')
+
         self.comportEntry.grid(row=3, column=1, columnspan=2, sticky='e')
         tk.Label(master=self.connectionFrame, text='Com Port:').grid(row=3, column=0)
         self.connectionFrame.grid(row=0, column=0, rowspan=2, columnspan=3, sticky='w')
 
-
+        # create frame for triggering buttons
         self.triggerFrame = tk.Frame(master=self.window)
         tk.Label(master=self.triggerFrame, text='Triggering Mode:').grid(row=0, column=0, columnspan=6, sticky='ew')
         self.internalTriggerbtn = tk.Button(master=self.triggerFrame, text='Internal Trigger', width=12, height=2,
@@ -90,34 +93,6 @@ class ControlGui_645:
 
         self.firingFrame.grid(row=3, column=8, rowspan=2, columnspan=2, sticky='w')
 
-        # Don't think this is necessary either
-
-        # self.viewheader = tk.Label(master=self.window, text='Change View')
-        # self.viewheader.grid(row=0, column=11, columnspan=3, sticky='new')
-
-        # self.reprateview = tk.Button(master=self.window, text='Rate', command=lambda: self.sendCommand('DISP 0,0'))
-        # self.reprateview.grid(row=1, column=11, sticky='nsew')
-        # self.zero_view = tk.Button(master=self.window, text='t0', command=lambda: self.sendCommand('DISP 11,0'))
-        # self.zero_view.grid(row=1, column=12, sticky='nsew')
-        # self.t_view = tk.Button(master=self.window, text='t1', command=lambda: self.sendCommand('DISP 11,1'))
-        # self.t_view.grid(row=1, column=13, sticky='nsew')
-        # self.t_view = tk.Button(master=self.window, text='A', command=lambda: self.sendCommand('DISP 11,2'))
-        # self.t_view.grid(row=2, column=11, sticky='nsew')
-        # self.t_view = tk.Button(master=self.window, text='B', command=lambda: self.sendCommand('DISP 11,3'))
-        # self.t_view.grid(row=2, column=12, sticky='nsew')
-        # self.t_view = tk.Button(master=self.window, text='C', command=lambda: self.sendCommand('DISP 11,4'))
-        # self.t_view.grid(row=2, column=13, sticky='nsew')
-        # self.t_view = tk.Button(master=self.window, text='D', command=lambda: self.sendCommand('DISP 11,5'))
-        # self.t_view.grid(row=3, column=11, sticky='nsew')
-        # self.t_view = tk.Button(master=self.window, text='E', command=lambda: self.sendCommand('DISP 11,6'))
-        # self.t_view.grid(row=3, column=12, sticky='nsew')
-        # self.t_view = tk.Button(master=self.window, text='F', command=lambda: self.sendCommand('DISP 11,7'))
-        # self.t_view.grid(row=3, column=13, sticky='nsew')
-        # self.t_view = tk.Button(master=self.window, text='G', command=lambda: self.sendCommand('DISP 11,8'))
-        # self.t_view.grid(row=4, column=11, sticky='nsew')
-        # self.t_view = tk.Button(master=self.window, text='H', command=lambda: self.sendCommand('DISP 11,9'))
-        # self.t_view.grid(row=4, column=12, sticky='nsew')
-
         self.delayFrame = tk.Frame(master=self.window)
         self.delayLabel = tk.Label(master=self.delayFrame, text='Set Channel Delay')
         self.delayLabel.grid(row=0, column=0, columnspan=7, sticky='ew')
@@ -159,10 +134,15 @@ class ControlGui_645:
         self.delayFrame.grid(row=3, column=0, columnspan=7, sticky='w')
         self.window.protocol("WM_DELETE_WINDOW", self._onClosing)
 
-
         self.window.mainloop()
 
     def _connectToBox(self):
+        """
+        Connects to box based on the input text in the comportEntry entry box.
+        Instantiates a delay readout and voltage readout from their respective classes.
+
+        :return: None
+        """
         self.DG645 = DG645(self.comportEntry.get())
         self.readout = DelayReadout(self.DG645.return_all_delays(), self.window, posX=6, posY=0)
         self.voltagereadout = voltageReadout(self.window, self.DG645.return_all_voltages(), posX=6, posY=6)
@@ -170,25 +150,50 @@ class ControlGui_645:
         self.connectbutton.config(bg='green')
 
     def _trigger(self, rep=False):
+        """
+        Sends the trigger command to the box. If you have it set to repeat, then it'll run at rep rate
+
+        :param rep: Bool, whether or not to fire repeatedly or singularly
+        :return: None
+        """
         if not rep:
             if not self._sendQuery('TSRC?') == '5':
-                self.sendCommand('TSRC 5')
-            self.sendCommand('*TRG')
+                self.DG645.sendcmd('TSRC 5')
+                # self.sendCommand('TSRC 5')
+            # self.sendCommand('*TRG')
+            self.DG645.sendcmd('*TRG')
+
         else:
             if not self._sendQuery('TSRC?') == '0':
-                self.sendCommand('TSRC 0')
+                # self.sendCommand('TSRC 0')
+                self.DG645.sendcmd('TSRC 0')
             self.repbutton.config(text='Stop?', command=self._stopTrigger)
 
     def _stopTrigger(self):
+        """
+        Stops the box from firing at rep rate
+
+        :return: None
+        """
         self.sendCommand('TSRC 5')
         self.repbutton.config(text='RepRate', command=lambda: self._trigger(rep=True))
 
     def _resetBox(self):
+        """
+        Resets connection if something becomes borked.
+
+        :return: None
+        """
         self.DG645.close()
         del self.DG645
         self._connectToBox()
 
     def _onClosing(self):
+        """
+        Runs when software closes to ensure proper cleanup
+
+        :return: None
+        """
         try:
             self.DG645.close()
             self.window.destroy()
@@ -196,6 +201,13 @@ class ControlGui_645:
             self.window.destroy()
 
     def _sendQuery(self, command, ins=False):
+        """
+        Sends query to the stanford box. Prints it either on cmd line or in the input box.
+
+        :param command: Command to send in sfsbox stuff
+        :param ins: bool, defaults to false. If true it inserts the response into the gui entry bar
+        :return: None
+        """
         self.entrybar.delete(0, 'end')
         rtn = self.DG645.query(command)
         if ins:
@@ -204,12 +216,23 @@ class ControlGui_645:
         return rtn
 
     def sendCommand(self, command):
+        """
+        Sends command to stanford box
+
+        :param command: command to send in proper dg645 syntax
+        :return: None
+        """
         self.entrybar.delete(0, 'end')
         self.DG645.sendcmd(command)
         self.readout.update(self.DG645.return_all_delays())
         self.voltagereadout.update(self.DG645.return_all_voltages())
 
     def setDelay(self):
+        """
+        Sets delay of target channel to desired link plus delay time
+
+        :return: None
+        """
         target = self.chosenDelayTarget.get()
         link = self.chosenDelayTargetLink.get()
         unit = self.chosenDelayUnit.get()

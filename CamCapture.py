@@ -1,14 +1,4 @@
-"""
-##################################################
-Controls the BFS U3 13Y3 camera. Adapted from
-FLIR provided example code for our use
-##################################################
-# Author:   Liam Droog
-# Email:    droog@ualberta.ca
-# Year:     2021
-# Version:  V.1.0.0
-##################################################
-"""
+
 
 import PySpin
 import sys
@@ -21,6 +11,15 @@ from PIL import ImageTk, Image
 import multiprocessing as mp
 
 class TriggerType:
+    """
+    Controls the BFS U3 13Y3 camera. Adapted from
+    FLIR provided example code for our use
+    Author:   Liam Droog
+    Email:    droog@ualberta.ca
+    Year:     2021
+    Version:  V.1.0.0
+    Defines a software or hardware trigger for the blackfly camera
+    """
     SOFTWARE = 1
     HARDWARE = 2
 
@@ -31,7 +30,7 @@ global shot_num
 # file_extension = 'png' # needs to be an input for main
 
 def configure_trigger(cam):
-    """1
+    """
     This function configures the camera to use a trigger. First, trigger mode is
     ensured to be off in order to select the trigger source. Trigger mode is
     then enabled, which has the camera capture only a single image upon the

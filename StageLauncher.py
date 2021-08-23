@@ -1,24 +1,20 @@
-"""
-##################################################
-Orchestrates the running of the FLIR camera for
-LIBS experiments. Depends on camcapture.py and
-Disp_images.py for capture and display of images
-respectively.
-##################################################
-# Author:   Liam Droog
-# Email:    droog@ualberta.ca
-# Year:     2021
-# Version:  V.1.0.0
-##################################################
-"""
-
 import tkinter as tk
 from StageClass import LIBS_2AxisStage
 import serial.tools.list_ports
 import os
 
-
 class StageLauncher:
+    """
+    Provides ability to launch and control the 2 axis
+    stage currently installed in the LIBS setup over
+    USB. Take care not to send it into the endstops,
+    eh?
+    # Author:   Liam Droog
+    # Email:    droog@ualberta.ca
+    # Year:     2021
+    # Version:  V.1.0.0
+
+    """
     def __init__(self, master, owd):
         # Stuff for launching stage
         # self.window = tk.Tk(className='Launcher')
@@ -76,9 +72,19 @@ class StageLauncher:
         self.window.mainloop()
 
     def __onclosing(self):
+        """
+        Runs on closing software to ensure proper cleanup
+
+        :return:
+        """
         self.window.destroy()
 
     def __startStage(self):
+        """
+        Starts the connection to the 2 axis stage
+
+        :return: None
+        """
         try:
             self.stage = LIBS_2AxisStage(self.comval.get(), self.baudval.get(), self.startfile.get(), self.owd).start()
         except Exception as e:

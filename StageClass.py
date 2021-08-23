@@ -1,14 +1,3 @@
-"""
-##################################################
-Class file for controlling the libs 2 axis stage
-##################################################
-# Author:   Liam Droog
-# Email:    droog@ualberta.ca
-# Year:     2021
-# Version:  V.1.0.0
-##################################################
-"""
-
 import tkinter as tk
 from tkinter import messagebox
 import tkinter.font as font
@@ -22,7 +11,13 @@ import multiprocessing as mp
 
 
 class LIBS_2AxisStage:
-
+    """
+    Class file for controlling the libs 2 axis stage
+    Author:   Liam Droog
+    Email:    droog@ualberta.ca
+    Year:     2021
+    Version:  V.1.0.0
+    """
     def __init__(self, port, baud, startupfile, owd):
         self.owd = owd
         os.chdir(self.owd)
@@ -208,18 +203,20 @@ class LIBS_2AxisStage:
 
 
     def start(self):
+        """
+        Starts stage gui by parsing last known position
+
+        :return: None
+        """
         self.__getLastPos()
         self.window.mainloop()
 
-    # def stop(self):
-    #     self.connected = False
-    #     self.s.close()
-    #     self.s = None
-    #     self.queue = None
-    #     print('Connection closed')
-    #     self.window.destroy()
-
     def __on_closing(self):
+        """
+        Runs on closing to ensure proper cleanup
+
+        :return: None
+        """
         if messagebox.askokcancel("Quit", "Quit?"):
             os.chdir(self.owd)
             self.__setLastPos()
@@ -249,6 +246,11 @@ class LIBS_2AxisStage:
 
 
     def isOpen(self):
+        """
+        Used to detect if connection is open or nah
+
+        :return: True if software is connected to grbl box and false if else
+        """
         if self.s:
             return self.s.is_open
         else:
@@ -271,15 +273,39 @@ class LIBS_2AxisStage:
             self.jogX(self.rate)
 
     def moveup(self, event):
+        """
+        Moves the stage up.
+
+        :param event: Event
+        :return: None
+        """
         self.jogY(self.rate)
 
     def movedown(self, event):
+        """
+        Moves the stage down.
+
+        :param event: Event
+        :return: None
+        """
         self.jogY((-1*self.rate))
 
     def moveleft(self, event):
+        """
+        Moves the stage left.
+
+        :param event: Event
+        :return: None
+        """
         self.jogX(-1*self.rate)
 
     def moveright(self, event):
+        """
+        Moves the stage right.
+
+        :param event: Event
+        :return: None
+        """
         self.jogX(self.rate)
 
     def jogX(self, v):
@@ -409,8 +435,8 @@ class LIBS_2AxisStage:
     def setG91(self, cmd=True):
         """
         Sets relative movements active
-        :param cmd: If true, send the G91 command, regardless, switch button text color to match
 
+        :param cmd: If true, send the G91 command, regardless, switch button text color to match
         :return: None
         """
         if self.s:
@@ -435,6 +461,7 @@ class LIBS_2AxisStage:
     def getPos(self):
         """
         returns position of stage
+
         :return: position of stage
         """
         return self.pos
@@ -461,6 +488,12 @@ class LIBS_2AxisStage:
                     self.pos[1] = float(i[1:])
 
     def sendOutput(self, text):
+        """
+        Sends output into output view
+
+        :param text: Text to input
+        :return: None
+        """
         self.output.insert('end', text)
         self.output.yview(tk.END)
 
@@ -499,6 +532,11 @@ class LIBS_2AxisStage:
         self.feedrate = int(self.parameters['xMaxRate'][1])
 
     def getStageParameters(self):
+        """
+        Returns stage parameters
+
+        :return: Stage parameters, string
+        """
         return self.parameters
 
     def __setFeed(self, feedrate):
@@ -511,15 +549,30 @@ class LIBS_2AxisStage:
         self.feedrate = feedrate
 
     def help(self):
+        """
+        HELP! Spawns a new window with the help file
+
+        :return: Stuff that might help.
+        """
         cwd = os.getcwd()
         p = mp.Process(target=os.system, args=(os.path.join(cwd, 'README.txt'),))
         p.start()
         # os.system(os.path.join(cwd, 'Config/Help.txt'))
 
     def __setLastPos(self):
+        """
+        Saves last known position
+
+        :return: None
+        """
         np.save('Config/Config.npy', self.pos)
 
     def __getLastPos(self):
+        """
+        Obtains the last known position on startup
+
+        :return: None
+        """
         try:
             self.pos = np.load('Config/Config.npy')
         except:
